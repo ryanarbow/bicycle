@@ -27,8 +27,6 @@ cruiser = bicycle("cruiser", 60, 200)
 bmx = bicycle("bmx", 55, 500)
 tandem = bicycle("tandem", 75, 600)
 
-
-
 stock = {
     road:5,
     mountain:6,
@@ -48,10 +46,10 @@ mellow = bike_shop("Mellow Johnnys", stock, .2, 0)
 han = customers("Han", 200, 0)
 luke = customers("Luke", 500, 0)
 leia = customers("Leia", 1000, 0)
-names = [han.name, luke.name, leia.name]
 
+#Testing
+names = [han.name, luke.name, leia.name]
 for name in names:
-    if 
     print (name)
 
 #if __name__ == '__main__':
