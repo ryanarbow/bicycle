@@ -4,9 +4,11 @@ class bicycle(object):
         self.model_name = model_name
         self.weight = weight
         self.prodcost = prodcost
+        
+    def affordable_bike(self,)
 
 class bike_shop(object):
-    def __init__(self, name, inventory, margin, profit):
+    def __init__(self, name, inventory = {}, margin = , profit):
         self.bike_shop = bike_shop
         self.name = name
         self.inventory = inventory
@@ -37,7 +39,7 @@ stock = {
 
 #Create a bicycle shop that has 6 different bicycle models in stock. 
 #The shop should charge its customers 20% over the cost of the bikes. 
-mellow = bike_shop("Mellow Johnnys", stock, .2, 0)
+mellow = bike_shop("Mellow Johnnys", stock, .2)
 
 #Create three customers. One customer has a budget of $200, the second 
 #$500, and the third $1000.
