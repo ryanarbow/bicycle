@@ -6,6 +6,8 @@ class bicycle(object):
         self.prodcost = prodcost
         
     def affordable_bike(self,)
+        for customer in customer_list:
+            if self.budget >=  
 
 class bike_shop(object):
     def __init__(self, name, inventory = {}, margin = , profit):
@@ -20,6 +22,8 @@ class customers(object):
         self.name = name
         self.budget = budget
         self.own = own
+        
+    
 
 #bike models
 road = bicycle("road", 25, 500)
@@ -28,6 +32,7 @@ hybrid = bicycle("hybrid", 30, 250)
 cruiser = bicycle("cruiser", 60, 200)
 bmx = bicycle("bmx", 55, 500)
 tandem = bicycle("tandem", 75, 600)
+inventory = [road, mountain, hybrid, cruiser, bmx, tandem]
 
 stock = {
     road:5,
@@ -44,14 +49,11 @@ mellow = bike_shop("Mellow Johnnys", stock, .2)
 #Create three customers. One customer has a budget of $200, the second 
 #$500, and the third $1000.
 
-
 han = customers("Han", 200, 0)
 luke = customers("Luke", 500, 0)
 leia = customers("Leia", 1000, 0)
+customer_list = [han, luke, leia]
 
-#Testing
-names = [han.name, luke.name, leia.name]
-for name in names:
-    print (name)
+
 
 #if __name__ == '__main__':
