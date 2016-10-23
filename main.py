@@ -2,16 +2,31 @@ from bicycles import Bicycle, BikeShop, Customer, Wheel, Frame, BicycleManufactu
 
 if __name__ == '__main__':
     # create 3 different wheel types
-    small = Wheel("small", 5, 10)
-    medium = Wheel("medium", 10, 15)
-    large = Wheel("large", 15, 20)
+    small = Wheel("small", 5, 40)
+    medium = Wheel("medium", 10, 50)
+    large = Wheel("large", 15, 60)
     wheels = [small, medium, large]
     
     # create 3 diffferent frames
-    aluminum = Frame("aluminum", 5, 10)
-    carbon = Frame("carbon", 15, 20)
-    steel = Frame("steel", 25, 30)
+    aluminum = Frame("aluminum", 5, 100)
+    carbon = Frame("carbon", 15, 200)
+    steel = Frame("steel", 25, 300)
     frames = [aluminum, carbon, steel]
+    
+    #create production 
+    road = Bicycle("road", small, carbon)#, 25, 500)
+    mountain = Bicycle("mountain", large, carbon)#, 55, 150)
+    hybrid = Bicycle("hybrid", medium, steel)#, 30, 250)
+    firstprod = [road, mountain, hybrid]
+    
+    #cruiser = Bicycle("cruiser", large, steel)#, 60, 200)
+    #bmx = Bicycle("bmx", small, aluminum)#, 55, 300)
+    #tandem = Bicycle("tandem", large, aluminum)#, 75, 600)
+    #secondprod= [cruiser, bmx, tandem]
+    
+    #create 2 suppliers
+    bob = BicycleManufacturer("bob", firstprod, 10)
+    #Tom = BicycleManufacturer("Tom", supply2, 10)
     
     # create a bike shop
     road = Bicycle("road", small, carbon)#, 25, 500)
@@ -21,11 +36,11 @@ if __name__ == '__main__':
     bmx = Bicycle("bmx", small, aluminum)#, 55, 300)
     tandem = Bicycle("tandem", large, aluminum)#, 75, 600)
     inventory = [road, mountain, hybrid, cruiser, bmx, tandem]
-    mellow = BikeShop("mellow", inventory, 20)
+    mellow = BikeShop("mellow", 20, bob)
     mellow.print_inventory()
     
     # create 3 customers
-    han = Customer("Han", 200)
+    han = Customer("Han", 300)
     luke = Customer("Luke", 500)
     leia = Customer("Leia", 1000)
     customers = [han, luke, leia]
@@ -39,4 +54,3 @@ if __name__ == '__main__':
     luke.purchase_bike(hybrid, mellow)
     leia.purchase_bike(road, mellow)
     mellow.print_inventory()
-    

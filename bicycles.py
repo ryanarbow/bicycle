@@ -1,28 +1,56 @@
+class Wheel(object):
+    def __init__(self, name, weight, cost):
+        self.name = name
+        self.weight = weight
+        self.cost = cost
+
+class Frame(object):
+    def __init__(self, material, weight, cost):
+        self.material = material
+        self.weight = weight
+        self.cost = cost
+
 class Bicycle(object):
     def __init__(self, name, wheel, frame):
         self.name = name
         self.weight =  int(wheel.weight*2) + int(frame.weight)
         self.cost = (wheel.cost*2) + (frame.cost)
+        self.wholesale_cost = 0
         self.retail_cost = 0
-        #self.composition = (wheel.size*2) + frame.material
-        
+
     def __repr__(self):
-        return ('{}:{}').format(self.name, self.retail_cost)
+        return ('{}:{}').format(self.name, self.wholesale_cost)
         
-class BikeShop(object):
-    def __init__(self, name, inventory, margin):
+class BicycleManufacturer(object):
+    def __init__(self, name, supply, margin):
         self.name = name
-        self.inventory = inventory
+        self.supply = supply
         self.margin = 1 + margin / 100
-        self.retail_cost(self.inventory)
-        self.profit = 0
+        self.wholesale_cost(self.supply)
     
-    def retail_cost(self, inventory):
-        for bike in inventory:
-            bike.retail_cost = self.margin * bike.cost
+    def wholesale_cost(self, supply):
+        for bike in supply:
+            bike.wholesale_cost = self.margin * bike.cost
     
     def print_inventory(self):
         print('<== {} inventory ==>'.format(self.name))
+        for bike in self.supply:
+            print('{}'.format(bike))
+        
+class BikeShop(object):
+    def __init__(self, name, margin, manufacturer):
+        self.name = name
+        self.inventory = manufacturer.supply
+        self.margin = 1 + margin / 100
+        self.retail_cost = 0
+        self.profit = 0
+    
+    def retail_cost(self):
+        for bike in self.inventory:
+            bike.retail_cost = self.margin * bike.wholesale_cost
+    
+    def print_inventory(self):
+        print('<== {} shop inventory ==>'.format(self.name))
         for bike in self.inventory:
             print('{}'.format(bike))
             
@@ -36,7 +64,7 @@ class BikeShop(object):
         return bikes_within_budget
         
     def sell_bike(self, bike):
-        self.profit = bike.retail_cost - bike.cost
+        self.profit = bike.retail_cost - bike.wholesale_cost
         self.inventory.remove(bike)
     
            
@@ -57,22 +85,3 @@ class Customer(object):
             self.fund -= bike.retail_cost
             print('{} purchased {} bike for {} with balance fund now {}'.format(
                 self.name, bike.name, bike.retail_cost, self.fund))
-
-class Wheel(object):
-    def __init__(self, name, weight, cost):
-        self.name = name
-        self.weight = weight
-        self.cost = cost
-
-    
-class Frame(object):
-    def __init__(self, material, weight, cost):
-        self.material = material
-        self.weight = weight
-        self.cost = cost
-        
-        
-class BicycleManufacturer(object):
-    def __init__(self, name):
-        self.name = name
-        
