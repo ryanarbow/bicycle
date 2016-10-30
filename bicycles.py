@@ -19,41 +19,42 @@ class Bicycle(object):
         self.retail_cost = 0
 
     def __repr__(self):
-        return ('{}:{}').format(self.name, self.wholesale_cost)
-        
+        return ('{}:{}:{}:{}').format(self.name, self.cost,
+                                      self.wholesale_cost, self.retail_cost)
+
 class BicycleManufacturer(object):
     def __init__(self, name, supply, margin):
         self.name = name
         self.supply = supply
         self.margin = 1 + margin / 100
         self.wholesale_cost(self.supply)
-    
+
     def wholesale_cost(self, supply):
         for bike in supply:
             bike.wholesale_cost = self.margin * bike.cost
-    
+
     def print_inventory(self):
         print('<== {} inventory ==>'.format(self.name))
         for bike in self.supply:
             print('{}'.format(bike))
-        
+
 class BikeShop(object):
     def __init__(self, name, margin, manufacturer):
         self.name = name
         self.inventory = manufacturer.supply
         self.margin = 1 + margin / 100
-        self.retail_cost = 0
+        self.retail_cost()
         self.profit = 0
-    
+
     def retail_cost(self):
         for bike in self.inventory:
             bike.retail_cost = self.margin * bike.wholesale_cost
-    
+
     def print_inventory(self):
         print('<== {} shop inventory ==>'.format(self.name))
         for bike in self.inventory:
             print('{}'.format(bike))
-            
+
     def find_affordable_bikes(self, customer):
         bikes_within_budget = []
         available_fund = customer.fund
@@ -62,22 +63,22 @@ class BikeShop(object):
                 bikes_within_budget.append(bike)
                 available_fund -= bike.retail_cost
         return bikes_within_budget
-        
+
     def sell_bike(self, bike):
         self.profit = bike.retail_cost - bike.wholesale_cost
         self.inventory.remove(bike)
-    
-           
+
+
 class Customer(object):
     def __init__(self, name, fund):
         self.name = name
         self.fund = fund
-    
+
     def print_affordable_bikes(self, bike_shop):
         affordable_bikes = bike_shop.find_affordable_bikes(self)
-        print('Customer: {0} can afford {1}'.format(self.name, 
-                                            affordable_bikes))  
-                                            
+        print('Customer: {0} can afford {1}'.format(self.name,
+                                            affordable_bikes))
+
     def purchase_bike(self, bike, bike_shop):
         affordable_bikes = bike_shop.find_affordable_bikes(self)
         if bike in affordable_bikes:
